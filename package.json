@@ -1,0 +1,24 @@
+{
+  "name": "rawdog",
+  "version": "1.0.0",
+  "description": "Mini app to output the raw ssb log",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify ./index.js --debug -o ./index.build.js",
+    "watch": "watchify ./index.js --debug -o ./index.build.js",
+    "build-commit": "browserify ./index.js -o ./index.build.js && html-inline -i ./index.html -o ./index.build.html",
+    "commit": "npm run build-commit; cat ./index.build.html | sbot blobs.add"
+  },
+  "author": "Paul Frazee <pfrazee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pull-serializer": "^0.3.2",
+    "pull-ws-server": "^1.5.0",
+    "ssb-client": "^3.0.1"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "watchify": "^3.7.0"
+  }
+}

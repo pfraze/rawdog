@@ -1,25 +1,38 @@
 # raw dog raw log
 
-This is a small test app for developing ssb-web-server against.
-It just spits out the ssb log stream in JSON.
-(Very trivial.)
+This is a small test app for ssb-web-server.
 
-The more interesting things are its structure and package.json.
-For instance, here are the package.json scripts:
+## Building
 
-```json
-{
-  "scripts": {
-    "build": "browserify ./index.js --debug -o ./index.build.js",
-    "watch": "watchify ./index.js --debug -o ./index.build.js",
-    "build-commit": "browserify ./index.js -o ./index.build.js && html-inline -i ./index.html -o ./index.build.html",
-    "commit": "npm run build-commit; cat ./index.build.html | sbot blobs.add"
-  }
-}
+Clone the repo, then run:
+
+```
+npm run build
 ```
 
----
+Or, if you're going to do some development:
 
-Obviously, `ws-client.js` should not be in this repo.
-Also, it might be a good idea to factor out those package.json scripts into a CLI tool?
-Or, we can put them in a boilerplate repo, for people to use as a starting point.
+```
+npm run watch
+```
+
+Next, link the cloned directory to your ssb www folder:
+
+```
+ln -s ~/rawdog ~/.ssb/www/rawdog
+```
+
+And open the app at `http://localhost:7778/rawdog/`.
+
+## Publishing
+
+To publish the app, run:
+
+```
+npm run commit
+```
+
+This will put the bundled app into your blobstore, and emit the hash-id.
+You can then open the bundled app at `http://localhost:7778/{hashid}`.
+
+To publish the app, post a message including the hash.

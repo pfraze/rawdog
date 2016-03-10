@@ -1,8 +1,3 @@
-var pull = require('pull-stream')
-var ssb = require('./ws-client')({
-  onClose: console.log.bind(console, 'Server-connection closed')
-})
-
 var lastMsg = null
 function fetchBatch() {
   console.log('fetching')
@@ -11,7 +6,7 @@ function fetchBatch() {
   pull(ssb.createLogStream({ limit: 1000, gt: gt }), pull.drain(function (msg) {
     // append to document
     var pre = document.createElement('pre')
-    pre.innerText = JSON.stringify(msg.value.content)
+    pre.innerText = pre.textContent = JSON.stringify(msg.value.content)
     document.body.appendChild(pre)
 
     // track most recent msg
@@ -29,4 +24,9 @@ fetchBatch()
 window.addEventListener('scroll', function () {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
     fetchBatch()
+})
+
+// test-button
+testButton.addEventListener('click', function () {
+  ssb.publish({ type: 'post', text: 'hello, world!' }, console.log.bind(console))
 })

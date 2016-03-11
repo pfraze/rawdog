@@ -1,6 +1,7 @@
-# raw dog raw log
+# ssb-web-server demo app
 
 This is a small test app for ssb-web-server.
+It outputs the ssb feed and has a button for posting a message.
 
 ## Building
 

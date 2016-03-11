@@ -20,10 +20,10 @@ npm run watch
 Next, link the cloned directory to your ssb www folder:
 
 ```
-ln -s ~/rawdog ~/.ssb/www/rawdog
+ln -s ~/ssb-web-server-demo-app ~/.ssb/www/demo-app
 ```
 
-And open the app at `http://localhost:7778/rawdog/`.
+And open the app at `http://localhost:7778/demo-app/`.
 
 ## Publishing
 
